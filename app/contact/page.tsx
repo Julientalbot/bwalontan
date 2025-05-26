@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Button from '@/components/Button';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -20,20 +21,53 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Pour l'instant, on affiche juste une alerte
-    alert('Merci pour votre message ! Nous vous recontacterons dans les plus brefs délais.');
-    // Réinitialiser le formulaire
-    setFormData({
-      nom: '',
-      email: '',
-      telephone: '',
-      typeProjet: '',
-      surface: '',
-      localisation: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.nom,
+          email: formData.email,
+          message: `
+Téléphone: ${formData.telephone}
+Type de projet: ${formData.typeProjet}
+Surface: ${formData.surface}
+Localisation: ${formData.localisation}
+
+${formData.message}`
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        // Réinitialiser le formulaire
+        setFormData({
+          nom: '',
+          email: '',
+          telephone: '',
+          typeProjet: '',
+          surface: '',
+          localisation: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -41,8 +75,8 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50">
         <div className="container mx-auto px-4">
-          <h1 className="text-5xl font-serif text-green-900 mb-6">Contact</h1>
-          <p className="text-xl text-gray-700 max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-serif text-green-900 mb-6">Contact</h1>
+          <p className="text-lg md:text-xl text-gray-700 max-w-3xl">
             Prêt à transformer votre terrain en écosystème nourricier ? 
             Contactez-nous pour discuter de votre projet.
           </p>
@@ -174,12 +208,25 @@ export default function Contact() {
                   />
                 </div>
                 
-                <button
+                <Button
                   type="submit"
-                  className="bg-green-800 text-white px-8 py-4 rounded-lg hover:bg-green-900 transition-colors duration-200 w-full md:w-auto"
+                  variant="primary"
+                  className="w-full md:w-auto"
                 >
-                  Envoyer ma demande
-                </button>
+                  {isSubmitting ? 'Envoi en cours...' : 'Envoyer ma demande'}
+                </Button>
+                
+                {submitStatus === 'success' && (
+                  <div className="mt-4 p-4 bg-green-100 text-green-800 rounded-lg">
+                    Merci pour votre message ! Nous vous recontacterons dans les plus brefs délais.
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg">
+                    Une erreur s'est produite. Veuillez réessayer ou nous contacter directement par email.
+                  </div>
+                )}
               </form>
             </div>
             
@@ -270,7 +317,7 @@ export default function Contact() {
           <div className="max-w-3xl mx-auto space-y-6">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="font-semibold text-green-800 mb-2">
-                Quelles sont vos zones d&apos;intervention ?
+                Quelles sont vos zones d'intervention ?
               </h3>
               <p className="text-gray-600">
                 Nous intervenons sur toute l&apos;île de La Réunion, de la côte aux hauts, 
@@ -300,7 +347,7 @@ export default function Contact() {
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="font-semibold text-green-800 mb-2">
-                Quel est le coût moyen d&apos;un projet ?
+                Quel est le coût moyen d'un projet ?
               </h3>
               <p className="text-gray-600">
                 Les coûts varient selon la taille et la complexité du projet. 

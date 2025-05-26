@@ -1,17 +1,18 @@
 import Link from 'next/link';
+import Button from '@/components/Button';
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-        <div className="absolute inset-0 bg-[url(&apos;/images/hero-pattern.svg&apos;)] opacity-5"></div>
+      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-20">
+        <div className="absolute inset-0 bg-[url('/images/hero-pattern.svg')] opacity-5"></div>
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-serif text-green-900 mb-6">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-green-900 mb-6">
               Bwa Lontan
             </h1>
-            <p className="text-2xl md:text-3xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 mb-8 leading-relaxed">
               Cultivons ensemble des écosystèmes nourriciers,
               <br />inspirés de la forêt tropicale réunionnaise
             </p>
@@ -20,13 +21,13 @@ export default function Home() {
               nous concevons des jardins-forêts productifs et résilients qui régénèrent 
               les sols et nourrissent les communautés.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/services" className="inline-block bg-green-800 text-white px-8 py-4 rounded-lg hover:bg-green-900 transition-colors duration-200">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button href="/services" variant="primary">
                 Découvrir nos services
-              </Link>
-              <Link href="/contact" className="inline-block border-2 border-green-800 text-green-800 px-8 py-4 rounded-lg hover:bg-green-800 hover:text-white transition-all duration-200">
+              </Button>
+              <Button href="/contact" variant="outline">
                 Démarrer votre projet
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
