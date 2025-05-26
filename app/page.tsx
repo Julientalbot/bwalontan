@@ -1,22 +1,33 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Button from '@/components/Button';
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-20">
-        <div className="absolute inset-0 bg-[url('/images/hero-pattern.svg')] opacity-5"></div>
+      <section className="relative min-h-screen flex items-center">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-syntropic-agriculture.jpg"
+            alt="Agriculture syntropique à La Réunion - Jardin-forêt luxuriant"
+            fill
+            className="object-cover"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+        </div>
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-green-900 mb-6">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-6 drop-shadow-lg">
               Bwa Lontan
             </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl text-white mb-8 leading-relaxed drop-shadow-md">
               Cultivons ensemble des écosystèmes nourriciers,
               <br />inspirés de la forêt tropicale réunionnaise
             </p>
-            <p className="text-lg text-gray-600 mb-12 max-w-2xl">
+            <p className="text-lg text-gray-100 mb-12 max-w-2xl drop-shadow">
               Spécialistes en agriculture syntropique et agroécologie à La Réunion, 
               nous concevons des jardins-forêts productifs et résilients qui régénèrent 
               les sols et nourrissent les communautés.
