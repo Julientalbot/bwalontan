@@ -71,7 +71,13 @@ export default function Home() {
               </Link>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-600"></div>
+              <Image
+                src="/images/syntropic-agriculture-system.jpg"
+                alt="Système d'agriculture syntropique - Diversité de cultures en strates"
+                fill
+                className="object-cover"
+                quality={85}
+              />
             </div>
           </div>
         </div>
