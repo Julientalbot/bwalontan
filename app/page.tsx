@@ -9,8 +9,8 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-tropical-forest.jpg"
-            alt="Sentier de forêt tropicale - Agriculture syntropique à La Réunion"
+            src="/images/hero-syntropic-agriculture.jpg"
+            alt="Agriculture syntropique à La Réunion - Jardin-forêt luxuriant"
             fill
             className="object-cover"
             priority
