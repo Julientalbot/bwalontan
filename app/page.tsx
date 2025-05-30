@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/Button';
+import CheckIcon from '@/components/ui/icons/CheckIcon';
+import ArrowIcon from '@/components/ui/icons/ArrowIcon';
 
 export default function Home() {
   return (
@@ -65,9 +67,7 @@ export default function Home() {
               </p>
               <Link href="/approche" className="text-green-800 font-medium hover:text-green-900 inline-flex items-center gap-2">
                 En savoir plus sur notre approche
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                <ArrowIcon className="w-5 h-5" />
               </Link>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
@@ -164,9 +164,7 @@ export default function Home() {
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <CheckIcon className="w-6 h-6 text-green-800" />
                   </div>
                 </div>
                 <div>
@@ -181,9 +179,7 @@ export default function Home() {
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <CheckIcon className="w-6 h-6 text-green-800" />
                   </div>
                 </div>
                 <div>
@@ -198,9 +194,7 @@ export default function Home() {
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <CheckIcon className="w-6 h-6 text-green-800" />
                   </div>
                 </div>
                 <div>
@@ -215,9 +209,7 @@ export default function Home() {
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <svg className="w-6 h-6 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                    <CheckIcon className="w-6 h-6 text-green-800" />
                   </div>
                 </div>
                 <div>
