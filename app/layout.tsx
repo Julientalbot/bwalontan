@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Fraunces, Source_Serif_4, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const fraunces = Fraunces({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["opsz"],
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-accent",
   subsets: ["latin"],
   display: "swap",
 });
@@ -69,9 +76,9 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${playfair.variable} ${inter.variable} antialiased`}
+        className={`${fraunces.variable} ${sourceSerif.variable} ${dmSans.variable}`}
       >
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-cream">
           <Header />
           <main className="flex-grow">
             {children}
