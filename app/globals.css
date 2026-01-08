@@ -114,26 +114,42 @@
   /* Text Colors */
   .text-forest { color: var(--color-forest); }
   .text-forest-deep { color: var(--color-forest-deep); }
+  .text-forest-light { color: var(--color-forest-light); }
   .text-canopy { color: var(--color-canopy); }
   .text-leaf { color: var(--color-leaf); }
+  .text-leaf-light { color: var(--color-leaf-light); }
   .text-earth { color: var(--color-earth); }
+  .text-earth-warm { color: var(--color-earth-warm); }
   .text-terracotta { color: var(--color-terracotta); }
   .text-gold { color: var(--color-gold); }
+  .text-gold-light { color: var(--color-gold-light); }
   .text-cream { color: var(--color-cream); }
 
   /* Background Colors */
   .bg-forest { background-color: var(--color-forest); }
   .bg-forest-deep { background-color: var(--color-forest-deep); }
+  .bg-forest-light { background-color: var(--color-forest-light); }
   .bg-canopy { background-color: var(--color-canopy); }
+  .bg-leaf { background-color: var(--color-leaf); }
+  .bg-leaf-light { background-color: var(--color-leaf-light); }
   .bg-cream { background-color: var(--color-cream); }
   .bg-cream-dark { background-color: var(--color-cream-dark); }
   .bg-sand { background-color: var(--color-sand); }
   .bg-earth { background-color: var(--color-earth); }
+  .bg-earth-warm { background-color: var(--color-earth-warm); }
+  .bg-terracotta { background-color: var(--color-terracotta); }
+  .bg-gold { background-color: var(--color-gold); }
+  .bg-gold-light { background-color: var(--color-gold-light); }
 
   /* Font Families */
   .font-display { font-family: var(--font-display); }
   .font-body { font-family: var(--font-body); }
   .font-accent { font-family: var(--font-accent); }
+
+  /* Shadow Colors */
+  .shadow-canopy\/20 { box-shadow: 0 10px 15px -3px rgba(74, 124, 89, 0.2); }
+  .shadow-terracotta\/20 { box-shadow: 0 10px 15px -3px rgba(201, 123, 74, 0.2); }
+  .shadow-forest\/20 { box-shadow: 0 10px 15px -3px rgba(45, 74, 45, 0.2); }
 }
 
 /* ============================================

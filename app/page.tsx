@@ -29,8 +29,26 @@ function useRevealOnScroll() {
   return ref
 }
 
-// Leaf SVG decoration component
-function LeafDecoration({ className }: { className?: string }) {
+// Leaf SVG decoration component - Enhanced version
+function LeafDecoration({ className, variant = 'default' }: { className?: string; variant?: 'default' | 'outline' | 'filled' }) {
+  if (variant === 'outline') {
+    return (
+      <svg className={className} viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M50 5C50 5 85 42 85 88C85 134 50 155 50 155C50 155 15 134 15 88C15 42 50 5 50 5Z"
+          stroke="currentColor"
+          strokeWidth="2"
+          fill="none"
+        />
+        <path
+          d="M50 25V145M32 55C42 50 50 55 50 55M68 75C58 70 50 75 50 75M35 95C45 90 50 95 50 95M65 115C55 110 50 115 50 115"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          opacity="0.6"
+        />
+      </svg>
+    )
+  }
   return (
     <svg className={className} viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -39,10 +57,20 @@ function LeafDecoration({ className }: { className?: string }) {
       />
       <path
         d="M50 20V150M30 60C40 55 50 60 50 60M70 80C60 75 50 80 50 80M35 100C45 95 50 100 50 100M65 120C55 115 50 120 50 120"
-        stroke="rgba(255,255,255,0.3)"
+        stroke="rgba(255,255,255,0.4)"
         strokeWidth="2"
       />
     </svg>
+  )
+}
+
+// Floating particles for hero background
+function FloatingParticle({ className, delay = 0 }: { className?: string; delay?: number }) {
+  return (
+    <div
+      className={`absolute rounded-full bg-white/20 backdrop-blur-sm ${className}`}
+      style={{ animationDelay: `${delay}s` }}
+    />
   )
 }
 
@@ -70,13 +98,20 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-forest-deep/50 via-transparent to-transparent" />
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute top-20 right-10 text-leaf/20 w-32 h-48 animate-leaf-sway hidden lg:block">
-          <LeafDecoration />
+        {/* Decorative Elements - Enhanced */}
+        <div className="absolute top-20 right-10 text-leaf-light/40 w-32 h-48 animate-leaf-sway hidden lg:block">
+          <LeafDecoration variant="outline" />
         </div>
-        <div className="absolute bottom-40 right-1/4 text-canopy/15 w-24 h-36 animate-leaf-sway hidden lg:block" style={{ animationDelay: '1s' }}>
-          <LeafDecoration />
+        <div className="absolute top-40 right-32 text-gold-light/30 w-20 h-32 animate-leaf-sway hidden lg:block" style={{ animationDelay: '0.5s' }}>
+          <LeafDecoration variant="outline" />
         </div>
+        <div className="absolute bottom-48 right-1/4 text-cream/25 w-24 h-36 animate-leaf-sway hidden lg:block" style={{ animationDelay: '1s' }}>
+          <LeafDecoration variant="outline" />
+        </div>
+        {/* Floating particles */}
+        <div className="absolute top-1/4 right-20 w-3 h-3 rounded-full bg-gold-light/30 animate-float hidden lg:block" />
+        <div className="absolute top-1/3 right-40 w-2 h-2 rounded-full bg-leaf-light/40 animate-float hidden lg:block" style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-1/3 right-1/3 w-4 h-4 rounded-full bg-cream/20 animate-float hidden lg:block" style={{ animationDelay: '2s' }} />
 
         {/* Content */}
         <div className="container mx-auto px-6 py-32 relative z-10">
@@ -88,14 +123,14 @@ export default function Home() {
             </div>
 
             {/* Main Title */}
-            <h1 className="text-cream mb-6 animate-fade-in-up delay-100">
-              <span className="block text-gold-light font-accent text-lg tracking-wider uppercase mb-4">Bwa Lontan</span>
+            <h1 className="text-cream mb-6 animate-fade-in-up delay-100 drop-shadow-lg">
+              <span className="block text-gold-light font-accent text-lg tracking-wider uppercase mb-4 drop-shadow-md">Bwa Lontan</span>
               Cultivons des écosystèmes
-              <span className="block text-leaf-light">nourriciers</span>
+              <span className="block text-leaf-light drop-shadow-md">nourriciers</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-cream/90 mb-8 leading-relaxed animate-fade-in-up delay-200 max-w-2xl">
+            <p className="text-xl md:text-2xl text-cream mb-8 leading-relaxed animate-fade-in-up delay-200 max-w-2xl drop-shadow-md" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.3)' }}>
               Spécialistes en agriculture syntropique, nous concevons des jardins-forêts
               productifs qui régénèrent les sols et nourrissent les communautés.
             </p>
@@ -239,18 +274,18 @@ export default function Home() {
           {/* Services Grid */}
           <div className="grid md:grid-cols-3 gap-8">
             {/* Service 1 */}
-            <div className="reveal card-organic p-8 group" style={{ transitionDelay: '100ms' }}>
-              <div className="w-16 h-16 bg-gradient-to-br from-canopy to-leaf rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3">
+            <Link href="/services#conception" className="reveal card-organic p-8 group flex flex-col" style={{ transitionDelay: '100ms' }}>
+              <div className="w-16 h-16 bg-gradient-to-br from-canopy to-leaf rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-canopy/20">
                 <svg className="w-8 h-8 text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-display text-forest-deep mb-4">Conception de projets</h3>
+              <h3 className="text-xl font-display text-forest-deep mb-4 group-hover:text-canopy transition-colors">Conception de projets</h3>
               <p className="text-forest/70 mb-6">
                 Design personnalisé de jardins-forêts et systèmes agroforestiers adaptés
                 à votre terrain et vos objectifs.
               </p>
-              <ul className="space-y-2 text-sm text-forest/60">
+              <ul className="space-y-2 text-sm text-forest/60 mb-6 flex-grow">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-canopy rounded-full" />
                   Analyse du site et du sol
@@ -264,21 +299,27 @@ export default function Home() {
                   Calendrier de mise en œuvre
                 </li>
               </ul>
-            </div>
+              <span className="inline-flex items-center gap-2 text-canopy font-accent font-medium text-sm group-hover:gap-3 transition-all">
+                En savoir plus
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </Link>
 
             {/* Service 2 */}
-            <div className="reveal card-organic p-8 group" style={{ transitionDelay: '200ms' }}>
-              <div className="w-16 h-16 bg-gradient-to-br from-earth-warm to-terracotta rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3">
+            <Link href="/services#formation" className="reveal card-organic p-8 group flex flex-col" style={{ transitionDelay: '200ms' }}>
+              <div className="w-16 h-16 bg-gradient-to-br from-earth-warm to-terracotta rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-terracotta/20">
                 <svg className="w-8 h-8 text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 className="text-xl font-display text-forest-deep mb-4">Formation & Accompagnement</h3>
+              <h3 className="text-xl font-display text-forest-deep mb-4 group-hover:text-terracotta transition-colors">Formation & Accompagnement</h3>
               <p className="text-forest/70 mb-6">
                 Transmission de savoirs et accompagnement technique pour autonomiser
                 votre pratique de l&apos;agriculture syntropique.
               </p>
-              <ul className="space-y-2 text-sm text-forest/60">
+              <ul className="space-y-2 text-sm text-forest/60 mb-6 flex-grow">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-terracotta rounded-full" />
                   Ateliers pratiques
@@ -292,21 +333,27 @@ export default function Home() {
                   Formation continue
                 </li>
               </ul>
-            </div>
+              <span className="inline-flex items-center gap-2 text-terracotta font-accent font-medium text-sm group-hover:gap-3 transition-all">
+                En savoir plus
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </Link>
 
             {/* Service 3 */}
-            <div className="reveal card-organic p-8 group" style={{ transitionDelay: '300ms' }}>
-              <div className="w-16 h-16 bg-gradient-to-br from-forest to-canopy rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3">
+            <Link href="/services#realisation" className="reveal card-organic p-8 group flex flex-col" style={{ transitionDelay: '300ms' }}>
+              <div className="w-16 h-16 bg-gradient-to-br from-forest to-canopy rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-lg shadow-forest/20">
                 <svg className="w-8 h-8 text-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </div>
-              <h3 className="text-xl font-display text-forest-deep mb-4">Réalisation & Suivi</h3>
+              <h3 className="text-xl font-display text-forest-deep mb-4 group-hover:text-forest transition-colors">Réalisation & Suivi</h3>
               <p className="text-forest/70 mb-6">
                 Mise en œuvre complète de votre projet avec suivi sur plusieurs saisons
                 pour assurer son succès.
               </p>
-              <ul className="space-y-2 text-sm text-forest/60">
+              <ul className="space-y-2 text-sm text-forest/60 mb-6 flex-grow">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-forest rounded-full" />
                   Installation du système
@@ -320,7 +367,26 @@ export default function Home() {
                   Optimisation continue
                 </li>
               </ul>
-            </div>
+              <span className="inline-flex items-center gap-2 text-forest font-accent font-medium text-sm group-hover:gap-3 transition-all">
+                En savoir plus
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </span>
+            </Link>
+          </div>
+
+          {/* CTA for all services */}
+          <div className="text-center mt-12 reveal">
+            <Link
+              href="/services"
+              className="btn btn-secondary inline-flex items-center gap-2 group"
+            >
+              <span>Voir tous nos services</span>
+              <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
@@ -421,6 +487,74 @@ export default function Home() {
       </section>
 
       {/* ============================================
+          TESTIMONIALS SECTION
+          ============================================ */}
+      <section className="section bg-cream-dark relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16 reveal">
+            <span className="inline-block px-4 py-1 rounded-full bg-canopy/10 text-canopy font-accent text-sm mb-6">
+              Témoignages
+            </span>
+            <h2 className="text-forest-deep mb-4">Ce que disent nos clients</h2>
+            <p className="text-lg text-forest/70">
+              Découvrez les retours d&apos;expérience de ceux qui ont transformé leur terrain
+              avec l&apos;agriculture syntropique.
+            </p>
+          </div>
+
+          {/* Testimonials Grid */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Grâce à Bwa Lontan, notre terrain aride est devenu un véritable jardin d'Éden. En deux ans, nous récoltons fruits, légumes et aromates en abondance.",
+                author: "Marie-Claire D.",
+                role: "Propriétaire à Saint-Paul",
+                initials: "MC",
+              },
+              {
+                quote: "L'accompagnement personnalisé fait toute la différence. L'équipe nous a guidés pas à pas, et aujourd'hui notre forêt comestible est autonome.",
+                author: "Jean-Pierre R.",
+                role: "Agriculteur à Cilaos",
+                initials: "JP",
+              },
+              {
+                quote: "Une approche révolutionnaire qui respecte la nature. Notre sol s'est régénéré de façon spectaculaire, et la biodiversité a explosé sur notre parcelle.",
+                author: "Sophie & Marc L.",
+                role: "Éco-lieu à Sainte-Rose",
+                initials: "SL",
+              },
+            ].map((testimonial, index) => (
+              <div
+                key={index}
+                className="reveal card-organic p-8 flex flex-col"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Quote icon */}
+                <svg className="w-10 h-10 text-canopy/20 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+
+                <p className="text-forest/80 leading-relaxed mb-6 flex-grow italic">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+
+                <div className="flex items-center gap-4 pt-4 border-t border-sand">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-canopy to-leaf flex items-center justify-center">
+                    <span className="text-cream font-accent font-medium text-sm">{testimonial.initials}</span>
+                  </div>
+                  <div>
+                    <p className="font-accent font-medium text-forest-deep">{testimonial.author}</p>
+                    <p className="text-sm text-forest/60">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================
           QUOTE SECTION
           ============================================ */}
       <section className="section section-dark relative overflow-hidden">
@@ -459,7 +593,7 @@ export default function Home() {
       </section>
 
       {/* ============================================
-          CTA SECTION
+          CTA SECTION - Enhanced
           ============================================ */}
       <section className="section bg-cream relative overflow-hidden">
         {/* Decorative background */}
@@ -469,25 +603,53 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-6 relative">
-          <div className="max-w-4xl mx-auto">
-            <div className="reveal text-center bg-gradient-to-br from-forest-deep to-forest rounded-[2.5rem] p-12 md:p-16 relative overflow-hidden">
+          <div className="max-w-5xl mx-auto">
+            <div className="reveal text-center bg-gradient-to-br from-forest-deep via-forest to-canopy rounded-[2.5rem] p-12 md:p-16 relative overflow-hidden shadow-2xl">
               {/* Decorative elements inside card */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-leaf/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-gold/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-72 h-72 bg-leaf/15 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute bottom-0 left-0 w-56 h-56 bg-gold/15 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-white/5 to-transparent opacity-50" />
+
+              {/* Decorative leaf icons */}
+              <div className="absolute top-8 left-8 text-cream/10 w-16 h-24 hidden md:block">
+                <LeafDecoration variant="outline" />
+              </div>
+              <div className="absolute bottom-8 right-8 text-cream/10 w-12 h-20 hidden md:block">
+                <LeafDecoration variant="outline" />
+              </div>
 
               <div className="relative">
-                <h2 className="text-cream mb-6">
+                {/* Icon */}
+                <div className="w-20 h-20 mx-auto mb-8 bg-cream/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-cream/20">
+                  <svg className="w-10 h-10 text-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </div>
+
+                <h2 className="text-cream mb-6 drop-shadow-lg">
                   Prêt à transformer votre terrain en écosystème nourricier ?
                 </h2>
-                <p className="text-xl text-cream/80 mb-10 max-w-2xl mx-auto">
+                <p className="text-xl text-cream/90 mb-10 max-w-2xl mx-auto leading-relaxed">
                   Contactez-nous pour discuter de votre projet et découvrir comment
                   l&apos;agriculture syntropique peut révolutionner votre approche du jardinage.
                 </p>
 
+                {/* Benefits mini-list */}
+                <div className="flex flex-wrap justify-center gap-4 mb-10">
+                  {['Devis gratuit', 'Accompagnement personnalisé', 'Expertise locale'].map((item, i) => (
+                    <span key={i} className="inline-flex items-center gap-2 px-4 py-2 bg-cream/10 backdrop-blur-sm rounded-full text-sm text-cream/90 border border-cream/20">
+                      <svg className="w-4 h-4 text-gold-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/contact"
-                    className="btn bg-cream text-forest-deep hover:bg-sand group"
+                    className="btn bg-cream text-forest-deep hover:bg-gold-light hover:text-forest-deep group shadow-lg"
                   >
                     <span>Demander un devis gratuit</span>
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -496,7 +658,7 @@ export default function Home() {
                   </Link>
                   <Link
                     href="/realisations"
-                    className="btn btn-ghost"
+                    className="btn btn-ghost hover:bg-cream/10"
                   >
                     Voir nos réalisations
                   </Link>
